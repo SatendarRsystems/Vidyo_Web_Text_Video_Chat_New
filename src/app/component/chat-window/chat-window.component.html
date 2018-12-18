@@ -1,0 +1,49 @@
+<div class="blanket" id="blanket" *ngIf="isLoading">
+    <div class="loader">
+        <img class="loader-img" src="assets/images/loading.gif" />
+        <div class="loader-text">You are about to enter the meeting room.</div>
+    </div>
+</div>
+
+<div class="blanket" id="blanket" *ngIf="errorOccured">
+    <div class="loader">
+        <div class="loader-text">{{error_message}}</div>
+        <!-- ok button -->
+        <div class="popup-button-row">
+            <button type="button" class="btn" (click)="close()">Ok</button>
+        </div>
+    </div>
+</div>
+
+<app-setting *ngIf="showSetting" id="setting" (hideSetting)="displaySetting($event)"> </app-setting>
+
+<div class="container">
+    <div class="main-wrapper">
+        <!--Header -->
+        <app-header (showSetting)="displaySetting($event)"></app-header>
+        <mat-sidenav-container class="box-wrapper chat-main-container">
+            <mat-sidenav #userlist class="user-list" mode="side" position="start" opened="true">
+                <!--User List -->
+                <app-user-list></app-user-list>
+            </mat-sidenav>
+            <mat-sidenav-content class="chat">
+                <!--Chat window -->
+                <div class="show-hide-controls">
+                    <button mat-icon-button color="white"  (click)="userlist.toggle()">
+                        <mat-icon>menu</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="messagelist.toggle()">
+                        <mat-icon>comments</mat-icon>
+                    </button>
+                </div>
+                <app-video-chat-window></app-video-chat-window>
+            </mat-sidenav-content>
+            <mat-sidenav #messagelist class="user-list" mode="side" position="end" opened="true" [fixedInViewport]="false" [fixedTopGap]="0"
+            [fixedBottomGap]="0">
+                <!--Text chat window-->
+                <app-text-chat-window></app-text-chat-window>
+
+            </mat-sidenav>
+        </mat-sidenav-container>
+    </div>
+</div>
