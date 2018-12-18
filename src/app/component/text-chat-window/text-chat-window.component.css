@@ -125,3 +125,8 @@
 .chat-message p {
 	word-break: break-all;
 }
+
+.chat-message pre {
+	white-space:pre-wrap;
+	word-wrap:break-word;
+}
