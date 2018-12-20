@@ -12,23 +12,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { ChatWindowComponent } from './component/chat-window/chat-window.component';
 import { SettingComponent } from './component/setting/setting.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatNativeDateModule,MatSidenavModule ,MatButtonModule,
-  MatButtonToggleModule,MatIconModule,
-  
-   } from '@angular/material';
+import { MatNativeDateModule, MatSidenavModule, MatButtonModule, MatButtonToggleModule, MatIconModule } from '@angular/material';
 
 @NgModule({
   exports: [
     MatButtonModule,
-  MatButtonToggleModule,
-  MatIconModule,
-  
+    MatButtonToggleModule,
+    MatIconModule,
     MatNativeDateModule,
     MatSidenavModule,
-    ]
+  ]
 })
-export class MaterialModule {}
-
+export class MaterialModule { }
 
 @NgModule({
   declarations: [

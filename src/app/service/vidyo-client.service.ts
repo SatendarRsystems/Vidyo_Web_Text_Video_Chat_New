@@ -425,13 +425,11 @@ export class VidyoClientService {
     }
 
     /**
-    * Description: function to logout from confrence
+    * Description: function logout to conference
     */
     logout = () => {
         const redirect = '/login';
-        this.vidyoConnector.Disconnect().then(() => {
-            this.vidyoConnector.SetCameraPrivacy({ privacy: true });
-            this.vidyoConnector.SetMicrophonePrivacy({ privacy: true });
+        this.vidyoConnector.Disable().then(() => {
             this.deInitAppData();
             this.router.navigate([redirect]);
         }).catch(() => {
@@ -448,16 +446,16 @@ export class VidyoClientService {
     }
 
     /**
-    * Description: function to logout from confrence
+    * Description: function disconnect to conference
     */
     disconnect = () => {
         this.vidyoConnector.SetCameraPrivacy({ privacy: true });
         this.vidyoConnector.SetMicrophonePrivacy({ privacy: true });
-        this.vidyoConnector.hideView("video-section");
+        this.vidyoConnector.hideView('video-section');
     }
 
     /**
-     * Description: function to logout from confrence
+     * Description: function reconnect to conference
      */
     reconnect = () => {
         this.vidyoConnector.SetCameraPrivacy({ privacy: false });
@@ -483,7 +481,8 @@ export class VidyoClientService {
     * Description: function to set the selected device (i.e. camera,microphone and speaker)
     */
     handleDeviceChange = (deviceType, deviceData) => {
-        deviceData = deviceData.name === "None" ? null : deviceData;
+        deviceData = deviceData.name === 'None' ? null : deviceData;
+
         switch (deviceType) {
             case 'camera':
                 this.vidyoConnector.SelectLocalCamera({
@@ -493,7 +492,7 @@ export class VidyoClientService {
                 }).catch(function () {
                     console.error('SelectCamera Failed');
                 });
-                deviceData === null ? this.selectedLocalCamera = 0 : "";
+                this.selectedLocalCamera = deviceData === null ?  0 : this.selectedLocalCamera ;
                 break;
             case 'microphone':
                 this.vidyoConnector.SelectLocalMicrophone({
@@ -503,7 +502,7 @@ export class VidyoClientService {
                 }).catch(function () {
                     console.error('Select Microphone Failed');
                 });
-                deviceData === null ? this.selectedLocalMicrophone = 0 : "";
+                this.selectedLocalMicrophone = deviceData === null ?  0 : this.selectedLocalMicrophone ;
                 break;
             case 'speaker':
                 this.vidyoConnector.SelectLocalSpeaker({
@@ -513,7 +512,7 @@ export class VidyoClientService {
                 }).catch(function () {
                     console.error('Select Speaker Failed');
                 });
-                deviceData === null ? this.selectedLocalSpeaker = 0 : "";
+                this.selectedLocalSpeaker = deviceData === null ?  0 : this.selectedLocalSpeaker ;
                 break;
         }
     }
